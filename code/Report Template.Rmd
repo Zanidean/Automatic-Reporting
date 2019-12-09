@@ -1,0 +1,64 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(xmrr)
+# xmr_data and prg are supplied by the .env the render function works from
+program_data = xmr_data %>% 
+  filter(Program == prg)
+```
+
+```{r, include=F}
+# This makes sure each chart looks exactly the same
+plotter = function(measure, f){
+  program_data %>% 
+    filter(Measure == measure) %>% 
+    xmr_chart2(Year, Value) + 
+    geom_text(aes(y = Value, label = f(Value, 1)), vjust = -1)
+}
+```
+
+```{r, include=F}
+# summary stats to be used as in-text examples. 
+summary_stats = program_data %>% 
+  group_by(Measure) %>% 
+  summarise(Max = max(Value), 
+            Min = min(Value), 
+            Mean = mean(Value),
+            `SD` = sd(Value)) %>% 
+  mutate(Range = Max - Min)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results = "asis"}
+cat("\n#", prg)
+```
+
+This is an example of a report that can be automatically generated. 
+
+This document renders as an html file, but the principles apply to all RMarkdown output types. 
+
+### Enrolment
+
+```{r, include=F}
+summary_e = summary_stats %>% 
+  filter(Measure == "Enrolment")
+```
+
+The maximum enrolment for `r prg` is `r summary_e$Max` students, and the minimum is `r summary_e$Min`.
+
+```{r echo=FALSE, fig.height=3, fig.width=10}
+plotter("Enrolment", f = scales::comma)
+```
+
+### Retention Rate
+
+```{r, include=F}
+summary_r = summary_stats %>% 
+  filter(Measure == "Retention Rate")
+```
+
+The average retention rate for `r prg` is `r scales::percent(summary_r$Mean, 1)`, and the standard deviation is `r scales::percent(summary_r$SD, 1)`.
+
+```{r echo=FALSE, fig.width=10, fig.height=3}
+plotter("Retention Rate", f = scales::percent)
+```
+
