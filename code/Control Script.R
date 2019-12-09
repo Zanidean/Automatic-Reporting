@@ -7,7 +7,7 @@ library(rmarkdown) # reporting package
 library(glue)      # strings + data
 library(xmrr)      # creates xmr data and charts
 
-# loads in previously saved data
+# loads in previously saved data 
 # this data must be in 'tidy' format to use with `xmrr`
 all_data = read_csv("data/all_data.csv") # loads data
 
