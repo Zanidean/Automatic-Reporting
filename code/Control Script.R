@@ -1,6 +1,10 @@
-#' The object of this code is to pull a set of data into R, generate xmr data, and then create separte reports for each 'Program' in the dataset. 
+#' The object of this code is to pull a set of data into R,
+#' generate xmr data, 
+#' and then create separte reports for each 'Program' in the dataset. 
 #' 
-#' This workflow was developed for our Program Review process, but generally speaking it can automate any reporting task wherein you want to create the same report for multiple entities. 
+#' This workflow was developed for our Program Review process, 
+#' but generally speaking it can automate any reporting task wherein 
+#' you want to create the same report for multiple entities. 
 
 library(tidyverse) # generic R utilities
 library(rmarkdown) # reporting package
