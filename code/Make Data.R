@@ -1,7 +1,6 @@
-library(tidyverse)
-library(rmarkdown)
-library(glue)
-library(xmrr)
+#' In practice, this file does not exist and instead you have a real dataset of all your programs and measures in one tidy-format. 
+
+library(tidyverse) # generic R utilities
 
 programs = c("Basket Weaving", 
              "Printing Press Operator", 
