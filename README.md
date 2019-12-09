@@ -1,1 +1,2 @@
-# R-Tutorials
+# Automatic Reporting with RMarkdown
+
