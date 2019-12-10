@@ -1,12 +1,16 @@
 
 # Automatic Reporting with RMarkdown
 
-This is an example of the automatic reporting workflow that I use in R.
+This is an example of the automatic reporting workflow in R. The
+following is the step-by-step instructions, and the relevant code and
+data is stored in this repo.
+
+Feel free to clone this repo and experiment as you see fit.
 
 ## Pre-Requisites
 
-You need R and RStudio, if neither are installed on your machine and you
-just want to stand something up to play around -
+To begin, you need R and RStudio. If neither are installed on your
+machine and you just want to stand something up to play around -
 [rstudio.cloud](https://rstudio.cloud/) has you covered.
 
 But, you will need to install some packages:
@@ -90,15 +94,16 @@ applications, I’ve scaled the same technique to report on 10 measures of
 RMarkdown is a package for weaving code and prose to create dynamic
 analysis reports. In standard practice, an analyst writes their analysis
 as an RMarkdown document, which can be rendered in almost any format
-(Word, PowerPoint, PDF, HTML, …). If the analyst runs the analysis again
-without changes, they get the same result. If the analyst changes
-something about the analysis, then they would get different results -
-***automatic reporting*** here is just programatically changing a few
-variables in the analysis.
+(Word, PowerPoint, PDF, HTML, …).
 
-RMarkdown is versatile, it can be formed to fit any type of analysis you
+If the analyst re-runs the analysis again without changes, then they get
+the same result. If the analyst changes something about the analysis,
+then they would get different results - ***automatic reporting*** here
+is just programatically changing a few variables in the analysis.
+
+RMarkdown is versatile; it can be formed to fit any type of analysis you
 want to achieve. For this reason, I’ve made a fairly simple report, but
-I’d encourage you to take a look at all that is possible.
+I’d encourage you to take a look at all that is possible with RMarkdown.
 
 In the `code/Report Template.Rmd`, the only input that’s programatically
 changed is `prg`, on Line 7. Effectively this filters the `xmr_data` to
