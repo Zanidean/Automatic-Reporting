@@ -9,7 +9,7 @@ This is an example of the automatic reporting workflow that I use in R.
 
 You need R and RStudio, if neither are installed on your machine and you just want to stand something up to play around - [rstudio.cloud](https://rstudio.cloud/) has you covered. 
 
-You will need to install some packages:
+But, you will need to install some packages:
 
 ```
 install.packages("tidyverse") # generic R utilities
@@ -17,27 +17,24 @@ install.packages("rmarkdown") # reporting package
 install.packages("glue")      # strings + data
 install.packages("xmrr")      # creates xmr data and charts
 ```
-
-```{r, include=F}
-library(tidyverse)
-library(xmrr)
-my_data = read_csv("data/all_data.csv")
-```
-
-
 ## Procedure
 
 #### Step 1 - Data
 
 In this tutorial you are provided a script to generate data in the `code/Make_Data.R` file. In the real world, you'll want to use real data. 
 
-Data in this tutorial is in a long-format. This means measures are kept in a column called `Measure` and their values are kept in a column called `Value`.
+Data in this tutorial is in a long format. This means measures are kept in a column called `Measure` and their values are kept in a column called `Value`.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(xmrr)
+
+my_data = read_csv("data/all_data.csv")
+
 my_data
 ```
 
-This is done to make efficient use of the `xmrr` package. 
+This long format is used to make efficient use of the `xmrr` package. 
 
 ```{r}
 xmr_data = my_data %>% 
@@ -51,9 +48,9 @@ This will be the dataset we'll use to generate reports from. Note that this only
 
 #### Step 2 - Write the report
 
-RMarkdown is a package for weaving code and prose to create dynamic analysis reports. In standard practice, an analyst writes their analysis as an RMarkdown document, which can be rendered in almost any format (Word, PowerPoint, PDF, HTML, ...). If the analyst runs the analysis again without changes, they get the same result. If the analyst changes something about the analysis, then they would get different results - all automatic reporting is, is just programatically  changing a few variables in the analysis. 
+RMarkdown is a package for weaving code and prose to create dynamic analysis reports. In standard practice, an analyst writes their analysis as an RMarkdown document, which can be rendered in almost any format (Word, PowerPoint, PDF, HTML, ...). If the analyst runs the analysis again without changes, they get the same result. If the analyst changes something about the analysis, then they would get different results - ***automatic reporting*** here is just programatically  changing a few variables in the analysis. 
 
-RMarkdown is versatile, it can be formed to fit any type of analysis you want to achieve. For this reason, I've made a fairly simple report.  
+RMarkdown is versatile, it can be formed to fit any type of analysis you want to achieve. For this reason, I've made a fairly simple report, but I'd encourage you to take a look at all that is possible. 
 
 In the `code/Report Template.Rmd`, the only input that's programatically changed is `prg`, on Line 7. Effectively this filters the `xmr_data` to include only one program, and the analysis that follows only works on that filtered data. 
 
@@ -75,19 +72,21 @@ xmr_data_filtered %>%
   xmr_chart2(Year, Value)
 ```
 
+And again, it's not strictly nessecary that your report looks anything like mine. Anything possible in R is possible in RMarkdown, and almost anything is possible in R. 
+
 #### Step 3 - Control 
 
 The most important step to this automatic reporting process is a `code/Control Script.R` that controls the inputs and rendering of these dynamic documents. 
 
-In this implementation, the control script loads data and turns it into xmr data before feeding it into the RMarkdown report to be rendered. In other implementations, one could any number of data manipulations prior to rendering the document. 
+In this implementation, the control script loads data and turns it into xmr data before feeding it into the RMarkdown report to be rendered. In other implementations, one could use any number of data manipulations prior to rendering the document. 
 
-RMarkdown usually works by creating it's own environment, and so all data and objects need to be defined within that RMarkdown document as it's rendered. In this technique, the control script defines that rendering environment and renders, only to loop back and change the environment before rendering again. 
+RMarkdown usually works by creating it's own environment, and so all data and objects need to be defined within that RMarkdown document as it's rendered. In this technique, the control script defines that rendering environment and renders the document accordingly, only to loop back and change the environment before rendering again. This treats the RMarkdown almost like a function your data passes through, not the stand-alone document it usually is. 
 
 In this implementation, the only thing that changes is which program `prg` represents. The RMarkdown document then renders according to that definition of `prg`. In other implementations, one could have many different inputs to that RMarkdown document - or with the use of another package like `Shiny`, one could interactively define these inputs. 
 
 # Conclusion
 
-The specific code in the above tutorial may not fit your use. The power of this technique is that one can easily generate reproducible reports, for any given factors in a dataset, without also generating the need to spend additional time. 
+The power of this technique is that one can easily generate reproducible reports, for any given factors in a dataset, without also generating the need to spend additional time. 
 
 
 
