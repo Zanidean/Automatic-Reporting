@@ -19,7 +19,7 @@ install.packages("xmrr")      # creates xmr data and charts
 ```
 ## Procedure
 
-#### Step 1 - Data
+### Step 1 - Data
 
 In this tutorial you are provided a script to generate data in the `code/Make_Data.R` file. In the real world, you'll want to use real data. 
 
@@ -46,7 +46,7 @@ xmr_data
 
 This will be the dataset we'll use to generate reports from. Note that this only contains two measures of three programs, but with this method you could use it for any combination of any variables. In my own applications, I've scaled the same technique to report on 10 measures of 30 programs with no additional manpower.
 
-#### Step 2 - Write the report
+### Step 2 - Write the report
 
 RMarkdown is a package for weaving code and prose to create dynamic analysis reports. In standard practice, an analyst writes their analysis as an RMarkdown document, which can be rendered in almost any format (Word, PowerPoint, PDF, HTML, ...). If the analyst runs the analysis again without changes, they get the same result. If the analyst changes something about the analysis, then they would get different results - ***automatic reporting*** here is just programatically  changing a few variables in the analysis. 
 
@@ -74,7 +74,7 @@ xmr_data_filtered %>%
 
 And again, it's not strictly nessecary that your report looks anything like mine. Anything possible in R is possible in RMarkdown, and almost anything is possible in R. 
 
-#### Step 3 - Control 
+### Step 3 - Control 
 
 The most important step to this automatic reporting process is a `code/Control Script.R` that controls the inputs and rendering of these dynamic documents. 
 

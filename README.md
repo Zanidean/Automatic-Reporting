@@ -18,7 +18,7 @@ But, you will need to install some packages:
 
 ## Procedure
 
-#### Step 1 - Data
+### Step 1 - Data
 
 In this tutorial you are provided a script to generate data in the
 `code/Make_Data.R` file. In the real world, you’ll want to use real
@@ -85,7 +85,7 @@ you could use it for any combination of any variables. In my own
 applications, I’ve scaled the same technique to report on 10 measures of
 30 programs with no additional manpower.
 
-#### Step 2 - Write the report
+### Step 2 - Write the report
 
 RMarkdown is a package for weaving code and prose to create dynamic
 analysis reports. In standard practice, an analyst writes their analysis
@@ -155,7 +155,7 @@ And again, it’s not strictly nessecary that your report looks anything
 like mine. Anything possible in R is possible in RMarkdown, and almost
 anything is possible in R.
 
-#### Step 3 - Control
+### Step 3 - Control
 
 The most important step to this automatic reporting process is a
 `code/Control Script.R` that controls the inputs and rendering of these
